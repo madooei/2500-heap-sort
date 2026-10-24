@@ -13,14 +13,8 @@ public final class HeapSort {
   // Sorts arr in ascending order, using a priority queue that holds a copy of
   // every element. Assumes arr is not null.
   public static void heapSortWithPriorityQueue(int[] arr) {
-    PriorityQueue<Integer> pq = new ArrayHeap<>();
-    for (int i = 0; i < arr.length; i++) {
-      pq.add(arr[i]);
-    }
-    for (int i = 0; i < arr.length; i++) {
-      arr[i] = pq.peek();
-      pq.remove();
-    }
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Sorts arr in ascending order, in place. Assumes arr is not null.
@@ -31,35 +25,21 @@ public final class HeapSort {
 
   // Rearranges arr into a max-heap.
   private static void buildHeap(int[] arr) {
-    int n = arr.length;
-    for (int i = n / 2 - 1; i >= 0; i--) {
-      sink(arr, i, n);
-    }
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Assumes arr is a max-heap. Rearranges it into ascending order.
   private static void sortdown(int[] arr) {
-    for (int end = arr.length - 1; end > 0; end--) {
-      swap(arr, 0, end);  // the root (largest) moves just past the heap
-      sink(arr, 0, end);  // restore the heap over the first end slots
-    }
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Moves arr[i] down until no child is larger than it. Only the first size
   // slots of arr belong to the heap.
   private static void sink(int[] arr, int i, int size) {
-    while (leftChild(i) < size) {
-      int larger = leftChild(i);
-      int right = rightChild(i);
-      if (right < size && arr[right] > arr[larger]) {
-        larger = right;
-      }
-      if (arr[i] >= arr[larger]) {
-        break;
-      }
-      swap(arr, i, larger);
-      i = larger;
-    }
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // The left child of the node at index i.
