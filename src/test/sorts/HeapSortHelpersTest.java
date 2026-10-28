@@ -8,10 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class HeapSortHelpersTest {
 
   @Test
-  public void buildHeapMakesTheChapterExampleAMaxHeap() {
-    int[] arr = {5, 3, 8, 1, 9, 2};
-    call("buildHeap", arr);
-    assertElements(new int[] {9, 5, 8, 1, 3, 2}, arr);
+  public void sinkMovesTheRootBelowItsLargerChild() {
+    int[] arr = {2, 5, 8, 1, 3};
+    callSink(arr, 0, 5);
+    assertElements(new int[] {8, 5, 2, 1, 3}, arr);
+  }
+
+  @Test
+  public void sinkLeavesTheSlotsPastSizeAlone() {
+    int[] arr = {2, 5, 8, 1, 3, 9};
+    callSink(arr, 0, 5);
+    assertEquals(9, arr[5]);
   }
 
   @Test
@@ -22,17 +29,10 @@ public class HeapSortHelpersTest {
   }
 
   @Test
-  public void sinkMovesTheRootBelowItsLargerChild() {
-    int[] arr = {2, 5, 8, 1, 3, 9};
-    callSink(arr, 0, 5);
-    assertElements(new int[] {8, 5, 2, 1, 3, 9}, arr);
-  }
-
-  @Test
-  public void sinkLeavesTheSlotsPastSizeAlone() {
-    int[] arr = {2, 5, 8, 1, 3, 9};
-    callSink(arr, 0, 5);
-    assertEquals(9, arr[5]);
+  public void buildHeapMakesAnUnsortedArrayAMaxHeap() {
+    int[] arr = {5, 3, 8, 1, 9, 2};
+    call("buildHeap", arr);
+    assertElements(new int[] {9, 5, 8, 1, 3, 2}, arr);
   }
 
   @Test
@@ -64,6 +64,7 @@ public class HeapSortHelpersTest {
     }
   }
 
+  // Asserts that actual holds exactly the expected elements, in order.
   private static void assertElements(int[] expected, int[] actual) {
     assertEquals(expected.length, actual.length);
     for (int i = 0; i < expected.length; i++) {

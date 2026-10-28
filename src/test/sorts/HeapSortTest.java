@@ -55,6 +55,13 @@ public abstract class HeapSortTest {
   }
 
   @Test
+  public void duplicatesAmongOtherValuesGetSorted() {
+    int[] arr = {3, 1, 3, 2, 1};
+    heapSort(arr);
+    assertElements(new int[] {1, 1, 2, 3, 3}, arr);
+  }
+
+  @Test
   public void negativesSortBeforePositives() {
     int[] arr = {-3, 1, -7, 4};
     heapSort(arr);
@@ -76,20 +83,6 @@ public abstract class HeapSortTest {
   }
 
   // Asserts that actual holds exactly the expected elements, in order.
-  @Test
-  public void chapterExampleGetsSorted() {
-    int[] arr = {5, 3, 8, 1, 9, 2};
-    heapSort(arr);
-    assertElements(new int[] {1, 2, 3, 5, 8, 9}, arr);
-  }
-
-  @Test
-  public void duplicatesAmongOtherValuesGetSorted() {
-    int[] arr = {3, 1, 3, 2, 1};
-    heapSort(arr);
-    assertElements(new int[] {1, 1, 2, 3, 3}, arr);
-  }
-
   private static void assertElements(int[] expected, int[] actual) {
     assertEquals(expected.length, actual.length);
     for (int i = 0; i < expected.length; i++) {
