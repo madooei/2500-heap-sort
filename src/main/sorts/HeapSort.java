@@ -10,17 +10,16 @@ public final class HeapSort {
     // This class should not be instantiated!
   }
 
-  // Sorts arr in ascending order, using a priority queue that holds a copy of
-  // every element. Assumes arr is not null.
+  // Sorts arr in ascending order. Assumes arr is not null.
   public static void heapSortWithPriorityQueue(int[] arr) {
     // TODO: Implement me
     throw new UnsupportedOperationException("TODO: Implement me");
   }
 
-  // Sorts arr in ascending order, in place. Assumes arr is not null.
+  // Sorts arr in ascending order. Assumes arr is not null.
   public static void heapSort(int[] arr) {
-    buildHeap(arr);   // rearrange the array into a max-heap
-    sortdown(arr);    // empty the heap, laying the values down in order
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Rearranges arr into a max-heap.
