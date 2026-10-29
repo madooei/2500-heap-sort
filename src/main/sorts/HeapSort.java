@@ -1,9 +1,6 @@
 package sorts;
 
-import priorityqueue.ArrayHeap;
-import priorityqueue.PriorityQueue;
-
-/** Heapsort, in a version that uses a priority queue and an in-place version. */
+/** Heapsort, in the in-place version. */
 public final class HeapSort {
 
   private HeapSort() {
@@ -11,13 +8,7 @@ public final class HeapSort {
   }
 
   // Sorts arr in ascending order. Assumes arr is not null.
-  public static void heapSortWithPriorityQueue(int[] arr) {
-    // TODO: Implement me
-    throw new UnsupportedOperationException("TODO: Implement me");
-  }
-
-  // Sorts arr in ascending order. Assumes arr is not null.
-  public static void heapSort(int[] arr) {
+  public static void sort(int[] arr) {
     // TODO: Implement me
     throw new UnsupportedOperationException("TODO: Implement me");
   }
