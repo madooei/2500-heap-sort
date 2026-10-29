@@ -9,11 +9,11 @@ public final class Main {
 
   public static void main(String[] args) {
     int[] first = {5, 3, 8, 1, 9, 2};
-    HeapSort.heapSortWithPriorityQueue(first);
+    HeapSortWithPriorityQueue.sort(first);
     System.out.println("with a priority queue: " + toText(first));
 
     int[] second = {5, 3, 8, 1, 9, 2};
-    HeapSort.heapSort(second);
+    HeapSort.sort(second);
     System.out.println("in place:              " + toText(second));
   }
 

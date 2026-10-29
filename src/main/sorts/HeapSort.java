@@ -1,9 +1,6 @@
 package sorts;
 
-import priorityqueue.ArrayHeap;
-import priorityqueue.PriorityQueue;
-
-/** Heapsort, in a version that uses a priority queue and an in-place version. */
+/** Heapsort, in the in-place version. */
 public final class HeapSort {
 
   private HeapSort() {
@@ -11,19 +8,7 @@ public final class HeapSort {
   }
 
   // Sorts arr in ascending order. Assumes arr is not null.
-  public static void heapSortWithPriorityQueue(int[] arr) {
-    PriorityQueue<Integer> pq = new ArrayHeap<>();
-    for (int i = 0; i < arr.length; i++) {
-      pq.add(arr[i]);
-    }
-    for (int i = 0; i < arr.length; i++) {
-      arr[i] = pq.peek();
-      pq.remove();
-    }
-  }
-
-  // Sorts arr in ascending order. Assumes arr is not null.
-  public static void heapSort(int[] arr) {
+  public static void sort(int[] arr) {
     buildHeap(arr);   // rearrange the array into a max-heap
     sortdown(arr);    // empty the heap, laying the values down in order
   }

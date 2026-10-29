@@ -5,6 +5,6 @@ public class HeapSortWithPriorityQueueTest extends HeapSortTest {
 
   @Override
   protected void heapSort(int[] arr) {
-    HeapSort.heapSortWithPriorityQueue(arr);
+    HeapSortWithPriorityQueue.sort(arr);
   }
 }
