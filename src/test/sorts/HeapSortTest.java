@@ -30,6 +30,13 @@ public class HeapSortTest extends SortTest {
   }
 
   @Test
+  public void sinkMovesTheRootDownMoreThanOneLevel() {
+    int[] arr = {1, 9, 8, 7, 6, 5, 4};
+    callSink(arr, 0, 7);
+    assertElements(new int[] {9, 7, 8, 1, 6, 5, 4}, arr);
+  }
+
+  @Test
   public void buildHeapLeavesAMaxHeapUnchanged() {
     int[] arr = {9, 5, 8, 1, 3, 2};
     call("buildHeap", arr);
@@ -44,10 +51,24 @@ public class HeapSortTest extends SortTest {
   }
 
   @Test
+  public void buildHeapSinksANodeMoreThanOneLevel() {
+    int[] arr = {1, 2, 3, 4, 5, 6, 7};
+    call("buildHeap", arr);
+    assertElements(new int[] {7, 5, 6, 4, 2, 1, 3}, arr);
+  }
+
+  @Test
   public void sortdownSortsAMaxHeap() {
     int[] arr = {9, 5, 8, 1, 3, 2};
     call("sortdown", arr);
     assertElements(new int[] {1, 2, 3, 5, 8, 9}, arr);
+  }
+
+  @Test
+  public void sortdownSortsASevenElementMaxHeap() {
+    int[] arr = {7, 6, 5, 4, 3, 2, 1};
+    call("sortdown", arr);
+    assertElements(new int[] {1, 2, 3, 4, 5, 6, 7}, arr);
   }
 
   // Calls the private static method name(int[]) of HeapSort on arr.
