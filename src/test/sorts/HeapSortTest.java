@@ -1,92 +1,74 @@
 package sorts;
 
+import java.lang.reflect.Method;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * The scenarios for heapsort. A concrete subclass supplies heapSort() to pick
- * the version under test.
+ * Runs the heapsort scenarios against the in-place version, then tests its
+ * private helpers through reflection.
  */
-public abstract class HeapSortTest {
+public class HeapSortTest extends SortTest {
 
-  // Calls the version under test.
-  protected abstract void heapSort(int[] arr);
-
-  @Test
-  public void emptyArrayStaysEmpty() {
-    int[] arr = {};
-    heapSort(arr);
-    assertElements(new int[] {}, arr);
+  @Override
+  protected void sort(int[] arr) {
+    HeapSort.sort(arr);
   }
 
   @Test
-  public void singleElementStaysPut() {
-    int[] arr = {1};
-    heapSort(arr);
-    assertElements(new int[] {1}, arr);
+  public void sinkMovesTheRootBelowItsLargerChild() {
+    int[] arr = {2, 5, 8, 1, 3};
+    callSink(arr, 0, 5);
+    assertElements(new int[] {8, 5, 2, 1, 3}, arr);
   }
 
   @Test
-  public void alreadySortedArrayIsUnchanged() {
-    int[] arr = {1, 2, 3};
-    heapSort(arr);
-    assertElements(new int[] {1, 2, 3}, arr);
+  public void sinkLeavesTheSlotsPastSizeAlone() {
+    int[] arr = {2, 5, 8, 1, 3, 9};
+    callSink(arr, 0, 5);
+    assertEquals(9, arr[5]);
   }
 
   @Test
-  public void reverseSortedArrayGetsSorted() {
-    int[] arr = {3, 2, 1};
-    heapSort(arr);
-    assertElements(new int[] {1, 2, 3}, arr);
+  public void buildHeapLeavesAMaxHeapUnchanged() {
+    int[] arr = {9, 5, 8, 1, 3, 2};
+    call("buildHeap", arr);
+    assertElements(new int[] {9, 5, 8, 1, 3, 2}, arr);
   }
 
   @Test
-  public void allDuplicatesAreUnchanged() {
-    int[] arr = {4, 4, 4};
-    heapSort(arr);
-    assertElements(new int[] {4, 4, 4}, arr);
+  public void buildHeapMakesAnUnsortedArrayAMaxHeap() {
+    int[] arr = {5, 3, 8, 1, 9, 2};
+    call("buildHeap", arr);
+    assertElements(new int[] {9, 5, 8, 1, 3, 2}, arr);
   }
 
   @Test
-  public void unsortedArrayGetsSorted() {
-    int[] arr = {5, 1, 4, 2};
-    heapSort(arr);
-    assertElements(new int[] {1, 2, 4, 5}, arr);
+  public void sortdownSortsAMaxHeap() {
+    int[] arr = {9, 5, 8, 1, 3, 2};
+    call("sortdown", arr);
+    assertElements(new int[] {1, 2, 3, 5, 8, 9}, arr);
   }
 
-  @Test
-  public void duplicatesAmongOtherValuesGetSorted() {
-    int[] arr = {3, 1, 3, 2, 1};
-    heapSort(arr);
-    assertElements(new int[] {1, 1, 2, 3, 3}, arr);
+  // Calls the private static method name(int[]) of HeapSort on arr.
+  private static void call(String name, int[] arr) {
+    try {
+      Method method = HeapSort.class.getDeclaredMethod(name, int[].class);
+      method.setAccessible(true);
+      method.invoke(null, arr);
+    } catch (ReflectiveOperationException e) {
+      throw new RuntimeException(e);
+    }
   }
 
-  @Test
-  public void negativesSortBeforePositives() {
-    int[] arr = {-3, 1, -7, 4};
-    heapSort(arr);
-    assertElements(new int[] {-7, -3, 1, 4}, arr);
-  }
-
-  @Test
-  public void powerOfTwoLengthGetsSorted() {
-    int[] arr = {5, 3, 8, 6, 2, 7, 1, 4};
-    heapSort(arr);
-    assertElements(new int[] {1, 2, 3, 4, 5, 6, 7, 8}, arr);
-  }
-
-  @Test
-  public void nonPowerOfTwoLengthGetsSorted() {
-    int[] arr = {6, 5, 2, 0, 9, 1, 3};
-    heapSort(arr);
-    assertElements(new int[] {0, 1, 2, 3, 5, 6, 9}, arr);
-  }
-
-  // Asserts that actual holds exactly the expected elements, in order.
-  private static void assertElements(int[] expected, int[] actual) {
-    assertEquals(expected.length, actual.length);
-    for (int i = 0; i < expected.length; i++) {
-      assertEquals(expected[i], actual[i]);
+  // Calls the private static method sink(int[], int, int) of HeapSort.
+  private static void callSink(int[] arr, int i, int size) {
+    try {
+      Method method = HeapSort.class.getDeclaredMethod("sink", int[].class, int.class, int.class);
+      method.setAccessible(true);
+      method.invoke(null, arr, i, size);
+    } catch (ReflectiveOperationException e) {
+      throw new RuntimeException(e);
     }
   }
 }
