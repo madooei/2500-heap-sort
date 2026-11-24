@@ -42,7 +42,7 @@ code/
 - `scripts/test.sh sorts.HeapSortTest` — compiles everything and runs only that test class.
 - `scripts/run.sh demo.HeapSortDemo` — compiles everything and runs that one demo. Every class you implement has its own demo.
 
-## What's here
+## Contents
 
 - `sorts.HeapSortWithPriorityQueue` — `sort`, the version that uses a priority queue.
 - `sorts.HeapSort` — `sort`, the in-place version. It uses private helpers: `buildHeap` sinks every internal node from the last one back to the root, `sortdown` swaps the root to the back of the heap and sinks the new root, and `sink` takes the size of the heap so it never touches the sorted tail.
