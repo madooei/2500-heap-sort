@@ -20,17 +20,19 @@ code/
       sorts/
         HeapSortWithPriorityQueue.java  # heapsort with a priority queue
         HeapSort.java                   # in-place heapsort and its helpers
-        Main.java                       # demo entry point (the chapter's example array)
       priorityqueue/
         PriorityQueue.java              # the PriorityQueue ADT
         ArrayHeap.java                  # the array binary heap from the binary heap chapter
+      demo/                             # one demo per version, on the chapter's example array
+        HeapSortWithPriorityQueueDemo.java
+        HeapSortDemo.java
     test/
       sorts/
         SortTest.java                   # abstract: the heapsort scenarios
         HeapSortWithPriorityQueueTest.java  # runs them against the priority queue version
         HeapSortTest.java               # runs them against the in-place version, plus its helpers
   scripts/
-    run.sh                              # compile and run the demo (sorts.Main)
+    run.sh                              # compile and run one demo
     test.sh                             # compile and run the JUnit tests
 ```
 
@@ -38,13 +40,13 @@ code/
 
 - `scripts/test.sh` — compiles everything and runs the full JUnit suite.
 - `scripts/test.sh sorts.HeapSortTest` — compiles everything and runs only that test class.
-- `scripts/run.sh` — compiles everything and runs the `Main` demo.
+- `scripts/run.sh demo.HeapSortDemo` — compiles everything and runs that one demo. Every class you implement has its own demo.
 
 ## What's here
 
 - `sorts.HeapSortWithPriorityQueue` — `sort`, the version that uses a priority queue.
 - `sorts.HeapSort` — `sort`, the in-place version. It uses private helpers: `buildHeap` sinks every internal node from the last one back to the root, `sortdown` swaps the root to the back of the heap and sinks the new root, and `sink` takes the size of the heap so it never touches the sorted tail.
-- `sorts.Main` — sorts the chapter's example array, `[5, 3, 8, 1, 9, 2]`, both ways.
+- `demo.HeapSortWithPriorityQueueDemo` and `demo.HeapSortDemo` — one demo per version, each sorting the chapter's example array, `[5, 3, 8, 1, 9, 2]`.
 - `priorityqueue.PriorityQueue<T>` and `priorityqueue.ArrayHeap<T>` — the PriorityQueue ADT and the array binary heap from the binary heap chapter, copied so this code compiles and runs on its own.
 - `sorts.SortTest` and its two subclasses — the sort scenarios, run once per version.
 - `sorts.HeapSortTest` — also checks `buildHeap`, `sink`, and `sortdown` by calling them through reflection.
